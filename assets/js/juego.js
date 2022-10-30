@@ -71,4 +71,13 @@ btnPedir.addEventListener("click", () => {
   imgCarta.classList.add('carta');
 
   divCartasJugador.append( imgCarta );
+
+  if (puntosJugador > 21) {
+    console.warn("Lo siento mucho, perdiste");
+    btnPedir.disabled = true;
+  } else if (puntosJugador === 21) {
+    console.warn("21, genial!");
+    btnPedir.disabled = true;
+  }
+
 });
