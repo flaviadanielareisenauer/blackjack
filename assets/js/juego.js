@@ -12,10 +12,12 @@ const tipos = ["C", "D", "H", "S"];
 const especiales = ["A", "J", "Q", "K"];
 
 let puntosJugador = 0;
-puntosComputadora = 0;
+let puntosComputadora = 0;
 
 // Referencias del HTML
 const btnPedir = document.querySelector("#btnPedir");
+
+const divCartasJugador = document.querySelector("#jugador-cartas");
 const puntosHTML = document.querySelectorAll("small");
 
 // Esta funcion crea un nuevo deck
@@ -33,6 +35,7 @@ const crearDeck = () => {
   }
 
   deck = _.shuffle(deck);
+
   return deck;
 };
 
@@ -46,14 +49,14 @@ const pedirCarta = () => {
 
   const carta = deck.pop();
 
-  return "2C";
+  return carta;
 };
 
 // Esta funcion me permite saber el valor de una carta
 const valorCarta = (carta) => {
   const valor = carta.substring(0, carta.length - 1);
 
-  return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
+  return (isNaN(valor)) ? (valor === "A") ? 11 : 10 : valor * 1;
 };
 
 // Eventos
@@ -62,4 +65,10 @@ btnPedir.addEventListener("click", () => {
 
   puntosJugador = puntosJugador + valorCarta(carta);
   puntosHTML[0].innerText = puntosJugador;
+
+  const imgCarta = document.createElement('img');
+  imgCarta.src = `assets/cartas/${ carta }.png`; 
+  imgCarta.classList.add('carta');
+
+  divCartasJugador.append( imgCarta );
 });
